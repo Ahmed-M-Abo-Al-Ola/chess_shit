@@ -131,5 +131,3 @@ int Position::get_full_moves() const
 {
     return fullMoves;
 }
-
-
