@@ -1,9 +1,10 @@
-#include "..\header files\utils.h"
-#include <string>
+#include "..\..\header files\utils.h"
+#include "..\header files\utils_test.h"
 #include <cassert>
 #include <iostream>
+using namespace std;
 
-int main(int argc, char const *argv[])
+void test_utils_square_name_to_square_index()
 {
     assert(utils::square_name_to_square_index("a8") == 0);
     
@@ -14,7 +15,5 @@ int main(int argc, char const *argv[])
     assert(utils::square_name_to_square_index("b7") == 9);
 
     cout << "utils::square_name_to_square_index() works properly." << endl;
-
-    return 0;
 }
 

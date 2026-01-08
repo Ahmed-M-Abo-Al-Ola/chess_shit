@@ -1,7 +1,9 @@
 #include "..\header files\Position.h"
+#include "..\header files\utils.h"
 #include <string>
 #include <sstream>
 #include <cctype>
+#include <iostream>
 
 
 Position::Position(const string& new_fen)
@@ -22,17 +24,19 @@ Position::Position(const string& new_fen)
     ss >> new_half_moves;
     ss >> new_full_moves;
 
-    int current_square_index = 0;
     for (char c: new_board)
     {
-        if (c == '//') {continue;}
-        if (isdigit(c) == true)
+        if (c == '/')
         {
-            current_square_index += c - '0';
             continue;
         }
-        board[current_square_index] = c;
-        current_square_index++;
+        if (isdigit(c) == true)
+        {
+            board += string(c-'0', '.');
+
+            continue;
+        }
+        board += c;
     }
 
     turn = new_turn == 'w';
@@ -60,4 +64,72 @@ Position::Position(const string& new_fen)
         }
     }
     
+    if (new_enpassant_square != "-")
+    {
+        enPassantSquare = utils::square_name_to_square_index(new_enpassant_square);
+    }
+    else
+    {
+        enPassantSquare = -1;
+    }
+
+    halfMoves = new_half_moves;
+
+    fullMoves = new_full_moves;
 }
+
+
+string Position::get_board() const
+{
+    return board;
+}
+
+
+bool Position::get_turn() const
+{
+    return turn;
+}
+
+
+bool Position::get_white_king_side_castling_right() const
+{
+    return whiteKingSideCastlingRight;
+}
+
+
+bool Position::get_white_queen_side_castling_right() const
+{
+    return whiteQueenSideCastlingRight;
+}
+
+
+bool Position::get_black_king_side_castling_right() const
+{
+    return blackKingSideCastlingRight;
+}
+
+
+bool Position::get_black_queen_side_castling_right() const
+{
+    return blackQueenSideCastlingRight;
+}
+
+
+int Position::get_en_passant_square() const
+{
+    return enPassantSquare;
+}
+
+
+int Position::get_half_moves() const
+{
+    return halfMoves;
+}
+
+
+int Position::get_full_moves() const
+{
+    return fullMoves;
+}
+
+
