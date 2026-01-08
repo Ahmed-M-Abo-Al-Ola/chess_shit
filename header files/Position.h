@@ -7,6 +7,7 @@ using namespace std;
 class Position {
     private:
         string board;
+        vector<Move> legalMoves;
         bool turn;
         bool whiteKingSideCastlingRight;
         bool whiteQueenSideCastlingRight;
@@ -27,4 +28,5 @@ class Position {
         int get_en_passant_square() const;
         int get_half_moves() const;
         int get_full_moves() const;
+        vector<Move> find_rook_moves(const int& index);
 };

@@ -29,73 +29,73 @@ void utils::print_board(const string& board)
 }
 
 
-bool utils::is_on_first_rank(const int& indix)
+bool utils::is_on_first_rank(const int& index)
 {
-    return 8 - indix / 8 == 1;
+    return 8 - index / 8 == 1;
 }
 
 
-bool utils::is_on_second_rank(const int& indix)
+bool utils::is_on_second_rank(const int& index)
 {
-    return 8 - indix / 8 == 2;
+    return 8 - index / 8 == 2;
 }
 
 
-bool utils::is_on_third_rank(const int& indix)
+bool utils::is_on_third_rank(const int& index)
 {
-    return 8 - indix / 8 == 3;
+    return 8 - index / 8 == 3;
 }
 
 
-bool utils::is_on_forth_rank(const int& indix)
+bool utils::is_on_forth_rank(const int& index)
 {
-    return 8 - indix / 8 == 4;
+    return 8 - index / 8 == 4;
 }
 
 
-bool utils::is_on_fifth_rank(const int& indix)
+bool utils::is_on_fifth_rank(const int& index)
 {
-    return 8 - indix / 8 == 5;
+    return 8 - index / 8 == 5;
 }
 
 
-bool utils::is_on_sixth_rank(const int& indix)
+bool utils::is_on_sixth_rank(const int& index)
 {
-    return 8 - indix / 8 == 6;
+    return 8 - index / 8 == 6;
 }
 
 
-bool utils::is_on_seventh_rank(const int& indix)
+bool utils::is_on_seventh_rank(const int& index)
 {
-    return 8 - indix / 8 == 7;
+    return 8 - index / 8 == 7;
 }
 
 
-bool utils::is_on_eighth_rank(const int& indix)
+bool utils::is_on_eighth_rank(const int& index)
 {
-    return 8 - indix / 8 == 8;
+    return 8 - index / 8 == 8;
 }
 
 
-bool utils::is_on_a_file(const int& indix)
+bool utils::is_on_a_file(const int& index)
 {
-    return indix % 8 == 0;
+    return index % 8 == 0;
 }
 
 
-bool utils::is_on_h_file(const int& indix)
+bool utils::is_on_h_file(const int& index)
 {
-    return indix % 8 == 7;
+    return index % 8 == 7;
 }
 
 
-bool utils::is_on_b_file(const int& indix)
+bool utils::is_on_b_file(const int& index)
 {
-    return indix % 8 == 1;
+    return index % 8 == 1;
 }
 
 
-bool utils::is_on_g_file(const int& indix)
+bool utils::is_on_g_file(const int& index)
 {
-    return indix % 8 == 6;
+    return index % 8 == 6;
 }

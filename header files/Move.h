@@ -1,3 +1,5 @@
+#pragma once
+
 class Move {
     private:
         int initialSquare;
@@ -5,4 +7,5 @@ class Move {
         char specialMove;
     public:
         Move(int initial_square, int terminal_square, char special_move = '-');
+        bool operator==(const Move& another) const;
 };

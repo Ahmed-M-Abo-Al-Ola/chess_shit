@@ -1,5 +1,6 @@
 #include "..\header files\Position.h"
 #include "..\header files\utils.h"
+#include "..\header files\Move.h"
 #include <string>
 #include <vector>
 #include <sstream>
@@ -132,4 +133,117 @@ int Position::get_full_moves() const
 {
     return fullMoves;
 }
+
+
+vector<Move> Position::find_rook_moves(const int& index)
+{
+    vector<Move> generated_moves;
+    int current_index;
+
+    // look upwards
+    if (utils::is_on_eighth_rank(index) == false)
+    {
+        current_index = index - 8;
+        while(true)
+        {
+            if (board[current_index] == '.')
+            {
+                generated_moves.push_back(Move(index, current_index));
+                if (utils::is_on_eighth_rank(current_index) == true)
+                {
+                    break;
+                }
+                current_index -= 8;
+                continue;
+            }
+            if (isupper(board[current_index]) != isupper(board[index]))
+            {
+                generated_moves.push_back(Move(index, current_index));
+            }
+            break;
+        }
+    }
+
+    // look downwards
+    if (utils::is_on_first_rank(index) == false)
+    {
+        current_index = index + 8;
+        while(true)
+        {
+            if (board[current_index] == '.')
+            {
+                generated_moves.push_back(Move(index, current_index));
+                if (utils::is_on_first_rank(current_index) == true)
+                {
+                    break;
+                }
+                current_index += 8;
+                continue;
+            }
+            if (isupper(board[current_index]) != isupper(board[index]))
+            {
+                generated_moves.push_back(Move(index, current_index));
+            }
+            break;
+        }
+    }
+
+    // look rightwards
+    if (utils::is_on_h_file(index) == false)
+    {
+        current_index = index + 1;
+        while(true)
+        {
+            if (board[current_index] == '.')
+            {
+                generated_moves.push_back(Move(index, current_index));
+                if (utils::is_on_h_file(current_index) == true)
+                {
+                    break;
+                }
+                current_index++;
+                continue;
+            }
+            if (isupper(board[current_index]) != isupper(board[index]))
+            {
+                generated_moves.push_back(Move(index, current_index));
+            }
+            break;
+        }
+    }
+
+    // look leftwards
+    if (utils::is_on_a_file(index) == false)
+    {
+        current_index = index - 1;
+        while(true)
+        {
+            if (board[current_index] == '.')
+            {
+                generated_moves.push_back(Move(index, current_index));
+                if (utils::is_on_a_file(current_index) == true)
+                {
+                    break;
+                }
+                current_index--;
+                continue;
+            }
+            if (isupper(board[current_index]) != isupper(board[index]))
+            {
+                generated_moves.push_back(Move(index, current_index));
+            }
+            break;
+        }
+    }
+
+    return generated_moves;
+}
+
+
+
+
+
+
+
+
 
