@@ -6,5 +6,6 @@ int main(int argc, char const *argv[])
 {
     test_utils_square_name_to_square_index();
     test_position_constructor();
+    test_square_positions_functions();
     return 0;
 }

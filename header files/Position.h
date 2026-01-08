@@ -1,5 +1,7 @@
 # pragma once
+#include "Move.h"
 #include <string>
+#include <vector>
 using namespace std;
 
 class Position {

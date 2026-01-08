@@ -27,3 +27,75 @@ void utils::print_board(const string& board)
     result += "     a     b     c     d     e     f     g     h\n";
     cout << result;
 }
+
+
+bool utils::is_on_first_rank(const int& indix)
+{
+    return 8 - indix / 8 == 1;
+}
+
+
+bool utils::is_on_second_rank(const int& indix)
+{
+    return 8 - indix / 8 == 2;
+}
+
+
+bool utils::is_on_third_rank(const int& indix)
+{
+    return 8 - indix / 8 == 3;
+}
+
+
+bool utils::is_on_forth_rank(const int& indix)
+{
+    return 8 - indix / 8 == 4;
+}
+
+
+bool utils::is_on_fifth_rank(const int& indix)
+{
+    return 8 - indix / 8 == 5;
+}
+
+
+bool utils::is_on_sixth_rank(const int& indix)
+{
+    return 8 - indix / 8 == 6;
+}
+
+
+bool utils::is_on_seventh_rank(const int& indix)
+{
+    return 8 - indix / 8 == 7;
+}
+
+
+bool utils::is_on_eighth_rank(const int& indix)
+{
+    return 8 - indix / 8 == 8;
+}
+
+
+bool utils::is_on_a_file(const int& indix)
+{
+    return indix % 8 == 0;
+}
+
+
+bool utils::is_on_h_file(const int& indix)
+{
+    return indix % 8 == 7;
+}
+
+
+bool utils::is_on_b_file(const int& indix)
+{
+    return indix % 8 == 1;
+}
+
+
+bool utils::is_on_g_file(const int& indix)
+{
+    return indix % 8 == 6;
+}

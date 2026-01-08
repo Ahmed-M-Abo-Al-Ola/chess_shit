@@ -1,6 +1,7 @@
 #include "..\header files\Position.h"
 #include "..\header files\utils.h"
 #include <string>
+#include <vector>
 #include <sstream>
 #include <cctype>
 #include <iostream>
@@ -131,3 +132,4 @@ int Position::get_full_moves() const
 {
     return fullMoves;
 }
+
