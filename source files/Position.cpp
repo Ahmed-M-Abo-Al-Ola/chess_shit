@@ -240,7 +240,113 @@ vector<Move> Position::find_rook_moves(const int& index)
 }
 
 
+vector<Move> Position::find_bishop_moves(const int& index)
+{
+    vector<Move> generated_moves;
+    int current_square;
 
+    // look upwards to the right
+    if (utils::is_on_eighth_rank(index) == false && utils::is_on_h_file(index) == false)
+    {
+        current_square = index - 7;
+        while(true)
+        {
+            if (board[current_square] == '.')
+            {
+                generated_moves.push_back(Move(index, current_square));
+                if (utils::is_on_eighth_rank(current_square) == true || utils::is_on_h_file(current_square) == true)
+                {
+                    break;
+                }
+                current_square -= 7;
+                continue;
+            }
+
+            if (isupper(board[current_square]) != isupper(board[index]))
+            {
+                generated_moves.push_back(Move(index, current_square));
+            }
+            break;
+        }
+    }
+
+    // look upwards to the left
+    if (utils::is_on_eighth_rank(index) == false && utils::is_on_a_file(index) == false)
+    {
+        current_square = index - 9;
+        while(true)
+        {
+            if (board[current_square] == '.')
+            {
+                generated_moves.push_back(Move(index, current_square));
+                if (utils::is_on_eighth_rank(current_square) == true || utils::is_on_a_file(current_square) == true)
+                {
+                    break;
+                }
+                current_square -= 9;
+                continue;
+            }
+
+            if (isupper(board[current_square]) != isupper(board[index]))
+            {
+                generated_moves.push_back(Move(index, current_square));
+            }
+            break;
+        }
+    }
+
+    // look downwards to the right
+    if (utils::is_on_first_rank(index) == false && utils::is_on_h_file(index) == false)
+    {
+        current_square = index + 9;
+        while(true)
+        {
+            if (board[current_square] == '.')
+            {
+                generated_moves.push_back(Move(index, current_square));
+                if (utils::is_on_first_rank(current_square) == true || utils::is_on_h_file(current_square) == true)
+                {
+                    break;
+                }
+                current_square += 9;
+                continue;
+            }
+
+            if (isupper(board[current_square]) != isupper(board[index]))
+            {
+                generated_moves.push_back(Move(index, current_square));
+            }
+            break;
+        }
+    }
+
+    // look downwards to the left
+    if (utils::is_on_first_rank(index) == false && utils::is_on_a_file(index) == false)
+    {
+        current_square = index + 7;
+        while(true)
+        {
+            if (board[current_square] == '.')
+            {
+                generated_moves.push_back(Move(index, current_square));
+                if (utils::is_on_first_rank(current_square) == true || utils::is_on_a_file(current_square) == true)
+                {
+                    break;
+                }
+                current_square += 7;
+                continue;
+            }
+
+            if (isupper(board[current_square]) != isupper(board[index]))
+            {
+                generated_moves.push_back(Move(index, current_square));
+            }
+            break;
+        }
+    }
+
+    return generated_moves;
+}
 
 
 

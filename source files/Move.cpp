@@ -14,3 +14,17 @@ bool Move::operator==(const Move& another) const
         this->terminalSquare == another.terminalSquare &&
         this->specialMove == another.specialMove;
 }
+
+
+int Move::get_initial_square() const
+{
+    return initialSquare;
+}
+
+
+int Move::get_terminal_square() const
+{
+    return terminalSquare;
+}
+
+
