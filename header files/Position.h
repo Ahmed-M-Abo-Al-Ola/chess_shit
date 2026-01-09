@@ -30,4 +30,5 @@ class Position {
         int get_full_moves() const;
         vector<Move> find_rook_moves(const int& index);
         vector<Move> find_bishop_moves(const int& index);
+        vector<Move> find_queen_moves(const int& index);
 };

@@ -6,6 +6,7 @@
 #include <sstream>
 #include <cctype>
 #include <iostream>
+#include <algorithm>
 
 
 Position::Position(const string& new_fen)
@@ -349,7 +350,13 @@ vector<Move> Position::find_bishop_moves(const int& index)
 }
 
 
-
+vector<Move> Position::find_queen_moves(const int& index)
+{
+    vector<Move> generated_moves = find_rook_moves(index);
+    vector<Move> diagonal_moves = find_bishop_moves(index);
+    generated_moves.insert(generated_moves.end(), diagonal_moves.begin(), diagonal_moves.end());
+    return generated_moves;
+}
 
 
 
