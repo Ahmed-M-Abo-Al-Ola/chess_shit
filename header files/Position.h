@@ -28,6 +28,7 @@ class Position {
         int get_en_passant_square() const;
         int get_half_moves() const;
         int get_full_moves() const;
+        vector<Move> get_legal_moves() const;
         vector<Move> find_rook_moves(const int& index) const;
         vector<Move> find_bishop_moves(const int& index) const;
         vector<Move> find_queen_moves(const int& index) const;
@@ -36,4 +37,6 @@ class Position {
         vector<Move> find_white_pawn_moves(const int& index) const;
         vector<Move> find_black_pawn_moves(const int& index) const;
         vector<Move> find_king_moves(const int& index) const;
+        vector<Move> find_pseudo_legal_moves() const;
+        
 };

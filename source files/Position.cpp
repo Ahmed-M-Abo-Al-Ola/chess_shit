@@ -79,6 +79,8 @@ Position::Position(const string& new_fen)
     halfMoves = new_half_moves;
 
     fullMoves = new_full_moves;
+
+    legalMoves = find_pseudo_legal_moves();
 }
 
 
@@ -133,6 +135,12 @@ int Position::get_half_moves() const
 int Position::get_full_moves() const
 {
     return fullMoves;
+}
+
+
+vector<Move> Position::get_legal_moves() const
+{
+    return legalMoves;
 }
 
 
@@ -685,7 +693,56 @@ vector<Move> Position::find_king_moves(const int& index) const
 }
 
 
+vector<Move> Position::find_pseudo_legal_moves() const
+{
+    vector<Move> moves;
+    vector<Move> generated_moves;
+    for (int i = 0; i < 64; i++)
+    {
+        if (isupper(board[i]) != turn)
+        {
+            continue;
+        }
+        switch (board[i])
+        {
+        case 'P':
+        case 'p':
+            moves = find_pawn_moves(i);
+            break;
+        
+        case 'N':
+        case 'n':
+            moves = find_knight_moves(i);
+            break;
+        
+        case 'B':
+        case 'b':
+            moves = find_bishop_moves(i);
+            break;
 
+        case 'R':
+        case 'r':
+            moves = find_rook_moves(i);
+            break;
+
+        case 'Q':
+        case 'q':
+            moves = find_queen_moves(i);
+            break;
+        
+        case 'K':
+        case 'k':
+            moves = find_king_moves(i);
+            break;
+        
+        default:
+            break;
+        }
+        generated_moves.insert(generated_moves.end(), moves.begin(), moves.end());
+        moves = {};
+    }
+    return generated_moves;
+}
 
 
 

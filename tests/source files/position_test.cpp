@@ -4,12 +4,20 @@
 #include <cassert>
 #include <vector>
 #include <iostream>
+#include <algorithm>
 using namespace std;
 
 void test_position_constructor()
 {
+    vector<Move> expected_moves;
+    vector<Move> actual_moves;
+
     // test default position
     Position p1;
+    expected_moves = {Move(48, 40), Move(48, 32), Move(49, 41), Move(49, 33), Move(50, 42), Move(50, 34),
+        Move(51, 43), Move(51, 35), Move(52, 44), Move(52, 36), Move(53, 45), Move(53, 37), Move(54, 46), Move(54, 38),
+        Move(55, 47), Move(55, 39), Move(57, 42), Move(57, 40), Move(62, 47), Move(62, 45)};
+    actual_moves = p1.get_legal_moves();
     assert(p1.get_board() == "rnbqkbnrpppppppp................................PPPPPPPPRNBQKBNR");
     assert(p1.get_turn() == true);
     assert(p1.get_white_king_side_castling_right() == true);
@@ -19,9 +27,16 @@ void test_position_constructor()
     assert(p1.get_en_passant_square() == -1);
     assert(p1.get_half_moves() == 0);
     assert(p1.get_full_moves() == 1);
+    assert(is_permutation(expected_moves.begin(), expected_moves.end(),actual_moves.begin(),actual_moves.end()));
 
     // test a random position
     Position p2("r2q2kr/pp1nbppp/2np1n2/2pPp3/2P1P3/2N2N2/PP1BBPPP/R2Q1RK1 b KQk c3 28 14");
+    expected_moves = {Move(0, 1), Move(0, 2), Move(3, 2), Move(3, 1), Move(3, 4), Move(3, 5), 
+        Move(3, 10), Move(3, 17), Move(3, 24), Move(6, 5), Move(8, 16), Move(8, 24), 
+        Move(9, 17), Move(9, 25), Move(11, 5), Move(11, 1), Move(11, 17), Move(12, 5), 
+        Move(14, 22), Move(14, 30), Move(15, 23), Move(15, 31), Move(18, 1), Move(18, 24), 
+        Move(18, 33), Move(18,35), Move(21, 4), Move(21, 31), Move(21, 38), Move(21, 27), Move(21, 36)};
+    actual_moves = p2.get_legal_moves();
     assert(p2.get_board() == "r..q..krpp.nbppp..np.n....pPp.....P.P.....N..N..PP.BBPPPR..Q.RK.");
     assert(p2.get_turn() == false);
     assert(p2.get_white_king_side_castling_right() == true);
@@ -31,6 +46,7 @@ void test_position_constructor()
     assert(p2.get_en_passant_square() == 42);
     assert(p2.get_half_moves() == 28);
     assert(p2.get_full_moves() == 14);
+    assert(is_permutation(expected_moves.begin(), expected_moves.end(),actual_moves.begin(),actual_moves.end()));
 
     cout << "The position constructor works properly." << endl;
 }
