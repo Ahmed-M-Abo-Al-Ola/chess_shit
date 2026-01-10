@@ -588,7 +588,101 @@ vector<Move> Position::find_black_pawn_moves(const int& index) const
 }
 
 
+vector<Move> Position::find_king_moves(const int& index) const
+{
+    vector<Move> generated_moves;
 
+    // look for the right three moves
+    if (utils::is_on_h_file(index) == false)
+    {
+        // look for the right move
+        if (board[index+1] == '.' || isupper(board[index+1]) != isupper(board[index]))
+        {
+            generated_moves.push_back(Move(index, index+1));
+        }
+        // look for the top move
+        if (utils::is_on_eighth_rank(index) == false && 
+            (board[index-7] == '.' || isupper(board[index-7]) != isupper(board[index])))
+        {
+            generated_moves.push_back(Move(index, index-7));
+        }
+        // look for the bottom move
+        if (utils::is_on_first_rank(index) == false && 
+            (board[index+9] == '.' || isupper(board[index+9]) != isupper(board[index])))
+        {
+            generated_moves.push_back(Move(index, index+9));
+        }
+    }
+
+    // look for the left three moves
+    if (utils::is_on_a_file(index) == false)
+    {
+        // look for the right move
+        if (board[index-1] == '.' || isupper(board[index-1]) != isupper(board[index]))
+        {
+            generated_moves.push_back(Move(index, index-1));
+        }
+        // look for the top move
+        if (utils::is_on_eighth_rank(index) == false && 
+            (board[index-9] == '.' || isupper(board[index-9]) != isupper(board[index])))
+        {
+            generated_moves.push_back(Move(index, index-9));
+        }
+        // look for the bottom move
+        if (utils::is_on_first_rank(index) == false && 
+            (board[index+7] == '.' || isupper(board[index+7]) != isupper(board[index])))
+        {
+            generated_moves.push_back(Move(index, index+7));
+        }
+    }
+
+    // look for the top move
+    if (utils::is_on_eighth_rank(index) == false && 
+        (board[index-8] == '.' || isupper(board[index-8]) != isupper(board[index])))
+    {
+        generated_moves.push_back(Move(index, index-8));
+    }
+
+    // look for the bottom move
+    if (utils::is_on_first_rank(index) == false && 
+        (board[index+8] == '.' || isupper(board[index+8]) != isupper(board[index])))
+    {
+        generated_moves.push_back(Move(index, index+8));
+    }
+
+    // check castling
+    if (isupper(board[index]) == true && index == 60)
+    {
+        if (whiteKingSideCastlingRight == true && 
+            board[61] == '.' && board[62] == '.')
+        {
+            generated_moves.push_back(Move(60, 62, 'K'));
+        }
+
+        if (whiteQueenSideCastlingRight == true && board[59] == '.' && 
+            board[58] == '.' && board[57] == '.')
+        {
+            generated_moves.push_back(Move(60, 58, 'C'));
+        }
+    }
+    
+    if (isupper(board[index]) == false && index == 4)
+    {
+        if (blackKingSideCastlingRight == true && 
+            board[5] == '.' && board[6] == '.')
+        {
+            generated_moves.push_back(Move(4, 6, 'k'));
+        }
+
+        if (blackQueenSideCastlingRight == true && board[3] == '.' && 
+            board[2] == '.' && board[1] == '.')
+        {
+            generated_moves.push_back(Move(4, 2, 'c'));
+        }
+    }
+
+    return generated_moves;
+}
 
 
 

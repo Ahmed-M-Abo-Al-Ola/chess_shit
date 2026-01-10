@@ -73,7 +73,7 @@ void test_rook_move_generation()
     expected_moves = {Move(63, 55), Move(63, 62)};
     assert(p6.find_rook_moves(63) == expected_moves);
 
-    cout << "Rook move generation works properly." << endl;
+    cout << "The rook move generation works properly." << endl;
 }
 
 
@@ -215,5 +215,62 @@ void test_pawn_move_generation()
 }
 
 
+void test_king_move_generation()
+{
+    vector<Move> expected_moves;
 
+    // test for open squares
+    Position p1("8/8/8/4K3/8/8/8/8 w - - 0 1");
+    expected_moves = {Move(28, 29), Move(28, 21), Move(28, 37), Move(28, 27), 
+        Move(28, 19), Move(28, 35), Move(28, 20), Move(28, 36)};
+    assert(p1.find_king_moves(28) == expected_moves);
+
+    // test for blockage
+    Position p2("8/8/3PPP2/3PKP2/3PPP2/8/8/8 w - - 0 1");
+    expected_moves = {};
+    assert(p2.find_king_moves(28) == expected_moves);
+
+    // test for captures
+    Position p3("8/8/3ppp2/3pKp2/3ppp2/8/8/8 w - - 0 1");
+    expected_moves = {Move(28, 29), Move(28, 21), Move(28, 37), Move(28, 27), 
+        Move(28, 19), Move(28, 35), Move(28, 20), Move(28, 36)};
+    assert(p3.find_king_moves(28) == expected_moves);
+
+    // test for edge cases
+    Position p4("K6k/8/8/8/8/8/8/k6K w - - 0 1");
+    expected_moves = {Move(0, 1), Move(0, 9), Move(0, 8)};
+    assert(p4.find_king_moves(0) == expected_moves);
+
+    expected_moves = {Move(7, 6), Move(7, 14), Move(7, 15)};
+    assert(p4.find_king_moves(7) == expected_moves);
+
+    expected_moves = {Move(56, 57), Move(56, 49), Move(56, 48)};
+    assert(p4.find_king_moves(56) == expected_moves);
+
+    expected_moves = {Move(63, 62), Move(63, 54), Move(63, 55)};
+    assert(p4.find_king_moves(63) == expected_moves);
+
+    // test for castling
+    Position p5("r3k2r/3ppp2/8/8/8/8/3PPP2/R3K2R w KQkq - 0 1");
+    expected_moves = {Move(60, 61), Move(60, 59), Move(60, 62, 'K'), Move(60, 58, 'C')};
+    assert(p5.find_king_moves(60) == expected_moves);
+    expected_moves = {Move(4, 5), Move(4, 3), Move(4, 6, 'k'), Move(4, 2, 'c')};
+    assert(p5.find_king_moves(4) == expected_moves);
+
+    // test for castling blockage
+    Position p6("rR2k1Rr/3ppp2/8/8/8/8/3PPP2/Rr2K1rR w KQkq - 0 1");
+    expected_moves = {Move(60, 61), Move(60, 59)};
+    assert(p6.find_king_moves(60) == expected_moves);
+    expected_moves = {Move(4, 5), Move(4, 3)};
+    assert(p6.find_king_moves(4) == expected_moves);
+
+    // test for castling rights being false
+    Position p7("r3k2r/3ppp2/8/8/8/8/3PPP2/R3K2R w - - 0 1");
+    expected_moves = {Move(60, 61), Move(60, 59)};
+    assert(p6.find_king_moves(60) == expected_moves);
+    expected_moves = {Move(4, 5), Move(4, 3)};
+    assert(p6.find_king_moves(4) == expected_moves);
+
+    cout << "The king move generation works properly." << endl;
+}
 

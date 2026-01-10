@@ -35,4 +35,5 @@ class Position {
         vector<Move> find_pawn_moves(const int& index) const;
         vector<Move> find_white_pawn_moves(const int& index) const;
         vector<Move> find_black_pawn_moves(const int& index) const;
+        vector<Move> find_king_moves(const int& index) const;
 };
