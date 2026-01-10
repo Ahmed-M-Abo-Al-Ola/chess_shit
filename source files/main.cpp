@@ -12,5 +12,6 @@ int main(int argc, char const *argv[])
     test_square_positions_functions();
     test_rook_move_generation();
     test_bishop_move_generation();
+    test_knight_move_generation();
     return 0;
 }

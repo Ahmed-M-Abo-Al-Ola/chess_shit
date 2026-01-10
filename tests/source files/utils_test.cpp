@@ -94,3 +94,4 @@ void test_square_positions_functions()
 
     cout << "The square position functions work properly." << endl;
 }
+

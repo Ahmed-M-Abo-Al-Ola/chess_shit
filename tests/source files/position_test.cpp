@@ -126,3 +126,46 @@ void test_bishop_move_generation()
     
     cout << "The bishop move generation works properly." << endl;
 }
+
+
+void test_knight_move_generation()
+{
+    vector<Move> expected_moves;
+
+    // test open squares
+    Position p1("8/8/8/4N3/8/8/8/8 w - - 0 1");
+    expected_moves = {Move(28, 22), Move(28, 38), Move(28, 18), Move(28, 34), Move(28, 13), 
+        Move(28, 11), Move(28, 45), Move(28, 43)};
+    assert(p1.find_knight_moves(28) == expected_moves);
+
+    // test for blockage
+    Position p2("8/3P1P2/2P3P1/4N3/2P3P1/3P1P2/8/8 w - - 0 1");
+    expected_moves = {};
+    assert(p2.find_knight_moves(28) == expected_moves);
+
+    // test for captures
+    Position p3("8/3p1p2/2p3p1/4N3/2p3p1/3p1p2/8/8 w - - 0 1");
+    expected_moves = {Move(28, 22), Move(28, 38), Move(28, 18), Move(28, 34), Move(28, 13), 
+        Move(28, 11), Move(28, 45), Move(28, 43)};
+    assert(p3.find_knight_moves(28) == expected_moves);
+
+    // test for edges
+    Position p4;
+    expected_moves = {Move(57, 42), Move(57, 40)};
+    assert(p4.find_knight_moves(57) == expected_moves);
+    expected_moves = {Move(62, 47), Move(62, 45)};
+    assert(p4.find_knight_moves(62) == expected_moves);
+    expected_moves = {Move(1, 18), Move(1, 16)};
+    assert(p4.find_knight_moves(1) == expected_moves);
+    expected_moves = {Move(6, 23), Move(6, 21)};
+    assert(p4.find_knight_moves(6) == expected_moves);
+
+    cout << "The knight move generation works properly." << endl;
+}
+
+
+
+
+
+
+

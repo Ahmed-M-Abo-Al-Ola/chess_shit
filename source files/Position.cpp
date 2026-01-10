@@ -136,7 +136,7 @@ int Position::get_full_moves() const
 }
 
 
-vector<Move> Position::find_rook_moves(const int& index)
+vector<Move> Position::find_rook_moves(const int& index) const
 {
     vector<Move> generated_moves;
     int current_index;
@@ -241,7 +241,7 @@ vector<Move> Position::find_rook_moves(const int& index)
 }
 
 
-vector<Move> Position::find_bishop_moves(const int& index)
+vector<Move> Position::find_bishop_moves(const int& index) const
 {
     vector<Move> generated_moves;
     int current_square;
@@ -350,13 +350,96 @@ vector<Move> Position::find_bishop_moves(const int& index)
 }
 
 
-vector<Move> Position::find_queen_moves(const int& index)
+vector<Move> Position::find_queen_moves(const int& index) const
 {
     vector<Move> generated_moves = find_rook_moves(index);
     vector<Move> diagonal_moves = find_bishop_moves(index);
     generated_moves.insert(generated_moves.end(), diagonal_moves.begin(), diagonal_moves.end());
     return generated_moves;
 }
+
+
+vector<Move> Position::find_knight_moves(const int& index) const
+{
+    vector<Move> generated_moves;
+
+    // look for the right two moves
+    if (utils::is_on_g_file(index) == false && utils::is_on_h_file(index) == false)
+    {
+        // look for the top move
+        if (utils::is_on_eighth_rank(index) == false && 
+            (board[index-6] == '.' || isupper(board[index-6]) != isupper(board[index])))
+        {
+            generated_moves.push_back(Move(index, index-6));
+        }
+
+        // look for the bottom move
+        if (utils::is_on_first_rank(index) == false && 
+            (board[index+10] == '.' || isupper(board[index+10]) != isupper(board[index])))
+        {
+            generated_moves.push_back(Move(index, index+10));
+        }
+    }
+
+    // look for the left two moves
+    if (utils::is_on_a_file(index) == false && utils::is_on_b_file(index) == false)
+    {
+        // look for the top move
+        if (utils::is_on_eighth_rank(index) == false && 
+            (board[index-10] == '.' || isupper(board[index-10]) != isupper(board[index])))
+        {
+            generated_moves.push_back(Move(index, index-10));
+        }
+
+        // look for the bottom move
+        if (utils::is_on_first_rank(index) == false && 
+            (board[index+6] == '.' || isupper(board[index+6]) != isupper(board[index])))
+        {
+            generated_moves.push_back(Move(index, index+6));
+        }
+    }
+
+    // look for the top two moves
+    if (utils::is_on_seventh_rank(index) == false && utils::is_on_eighth_rank(index) == false)
+    {
+        // look for the right move
+        if (utils::is_on_h_file(index) == false && 
+            (board[index-15] == '.' || isupper(board[index-15]) != isupper(board[index])))
+        {
+            generated_moves.push_back(Move(index, index-15));
+        }
+
+        // look for the left move
+        if (utils::is_on_a_file(index) == false && 
+            (board[index-17] == '.' || isupper(board[index-17]) != isupper(board[index])))
+        {
+            generated_moves.push_back(Move(index, index-17));
+        }
+    }
+
+    // look for the bottom two moves
+    if (utils::is_on_first_rank(index) == false && utils::is_on_second_rank(index) == false)
+    {
+        // look for the right move
+        if (utils::is_on_h_file(index) == false && 
+            (board[index+17] == '.' || isupper(board[index+17]) != isupper(board[index])))
+        {
+            generated_moves.push_back(Move(index, index+17));
+        }
+
+        // look for the left move
+        if (utils::is_on_a_file(index) == false && 
+            (board[index+15] == '.' || isupper(board[index+15]) != isupper(board[index])))
+        {
+            generated_moves.push_back(Move(index, index+15));
+        }
+    }
+
+    return generated_moves;
+}
+
+
+
 
 
 
