@@ -439,6 +439,160 @@ vector<Move> Position::find_knight_moves(const int& index) const
 }
 
 
+vector<Move> Position::find_pawn_moves(const int& index) const
+{
+    if (isupper(board[index]) == true)
+    {
+        return find_white_pawn_moves(index);
+    }
+    else
+    {
+        return find_black_pawn_moves(index);
+    }
+}
+
+
+vector<Move> Position::find_white_pawn_moves(const int& index) const
+{
+    vector<Move> generated_moves;
+
+    // find single moves
+    if (board[index-8] == '.')
+    {
+        if (utils::is_on_eighth_rank(index-8) == true)
+        {
+            generated_moves.push_back(Move(index, index-8, 'Q'));
+            generated_moves.push_back(Move(index, index-8, 'N'));
+            generated_moves.push_back(Move(index, index-8, 'R'));
+            generated_moves.push_back(Move(index, index-8, 'B'));
+        }
+        else
+        {
+            generated_moves.push_back(Move(index, index-8));
+        }
+
+        // find double moves
+        if (utils::is_on_second_rank(index) == true && board[index-16] == '.')
+        {
+            generated_moves.push_back(Move(index, index-16));
+        }
+    }
+
+    // find captures
+    if (board[index-7] != '.' && isupper(board[index-7]) != true)
+    {
+        if (utils::is_on_eighth_rank(index-7) == true)
+        {
+            generated_moves.push_back(Move(index, index-7, 'Q'));
+            generated_moves.push_back(Move(index, index-7, 'N'));
+            generated_moves.push_back(Move(index, index-7, 'R'));
+            generated_moves.push_back(Move(index, index-7, 'B'));
+        }
+        else
+        {
+            generated_moves.push_back(Move(index, index-7));
+        }   
+    }
+
+    if (board[index-9] != '.' && isupper(board[index-9]) != true)
+    {
+        if (utils::is_on_eighth_rank(index-9) == true)
+        {
+            generated_moves.push_back(Move(index, index-9, 'Q'));
+            generated_moves.push_back(Move(index, index-9, 'N'));
+            generated_moves.push_back(Move(index, index-9, 'R'));
+            generated_moves.push_back(Move(index, index-9, 'B'));
+        }
+        else
+        {
+            generated_moves.push_back(Move(index, index-9));
+        }   
+    }
+
+    // check for en passant
+    if (enPassantSquare != -1 && utils::is_on_sixth_rank(enPassantSquare) && 
+        (index-7 == enPassantSquare || index-9 == enPassantSquare))
+    {
+        generated_moves.push_back(Move(index, enPassantSquare, 'E'));
+    }
+
+    return generated_moves;
+}
+
+
+vector<Move> Position::find_black_pawn_moves(const int& index) const
+{
+        vector<Move> generated_moves;
+
+    // find single moves
+    if (board[index+8] == '.')
+    {
+        if (utils::is_on_first_rank(index+8) == true)
+        {
+            generated_moves.push_back(Move(index, index+8, 'q'));
+            generated_moves.push_back(Move(index, index+8, 'n'));
+            generated_moves.push_back(Move(index, index+8, 'r'));
+            generated_moves.push_back(Move(index, index+8, 'b'));
+        }
+        else
+        {
+            generated_moves.push_back(Move(index, index+8));
+        }
+
+        // find double moves
+        if (utils::is_on_seventh_rank(index) == true && board[index+16] == '.')
+        {
+            generated_moves.push_back(Move(index, index+16));
+        }
+    }
+
+    // find captures
+    if (board[index+9] != '.' && isupper(board[index+9]) != false)
+    {
+        if (utils::is_on_first_rank(index+9) == true)
+        {
+            generated_moves.push_back(Move(index, index+9, 'q'));
+            generated_moves.push_back(Move(index, index+9, 'n'));
+            generated_moves.push_back(Move(index, index+9, 'r'));
+            generated_moves.push_back(Move(index, index+9, 'b'));
+        }
+        else
+        {
+            generated_moves.push_back(Move(index, index+9));
+        }   
+    }
+
+    if (board[index+7] != '.' && isupper(board[index+7]) != false)
+    {
+        if (utils::is_on_first_rank(index+7) == true)
+        {
+            generated_moves.push_back(Move(index, index+7, 'q'));
+            generated_moves.push_back(Move(index, index+7, 'n'));
+            generated_moves.push_back(Move(index, index+7, 'r'));
+            generated_moves.push_back(Move(index, index+7, 'b'));
+        }
+        else
+        {
+            generated_moves.push_back(Move(index, index+7));
+        }   
+    }
+
+    // check for en passant
+    if (enPassantSquare != -1 && utils::is_on_third_rank(enPassantSquare) && 
+        (index+7 == enPassantSquare || index+9 == enPassantSquare))
+    {
+        generated_moves.push_back(Move(index, enPassantSquare, 'e'));
+    }
+
+    return generated_moves;
+}
+
+
+
+
+
+
+
 
 
 

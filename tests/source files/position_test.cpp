@@ -164,7 +164,55 @@ void test_knight_move_generation()
 }
 
 
+void test_pawn_move_generation()
+{
+    vector<Move> expected_moves;
 
+    // test for starting position
+    Position p1("8/4p3/8/8/8/8/4P3/8 w - - 0 1");
+    expected_moves = {Move(52, 44), Move(52, 36)};
+    assert(p1.find_pawn_moves(52) == expected_moves);
+    expected_moves = {Move(12, 20), Move(12, 28)};
+    assert(p1.find_pawn_moves(12) == expected_moves);
+
+    // test for single move promotions
+    Position p2("8/4P3/8/8/8/8/4p3/8 w - - 0 1");
+    expected_moves = {Move(12, 4, 'Q'), Move(12, 4, 'N'), Move(12, 4, 'R'), Move(12, 4, 'B')};
+    assert(p2.find_pawn_moves(12) == expected_moves);
+    expected_moves = {Move(52, 60, 'q'), Move(52, 60, 'n'), Move(52, 60, 'r'), Move(52, 60, 'b')};
+    assert(p2.find_pawn_moves(52) == expected_moves);
+
+    // test for captures
+    Position p3("8/8/4p3/3P1P2/3p1p2/4P3/8/8 w - - 0 1");
+    expected_moves = {Move(44, 36), Move(44, 37), Move(44, 35)};
+    assert(p3.find_pawn_moves(44) == expected_moves);
+    expected_moves = {Move(20, 28), Move(20, 29), Move(20, 27)};
+    assert(p3.find_pawn_moves(20) == expected_moves);
+
+    // test for promotion captures
+    Position p4("3rrr2/4P3/8/8/8/8/4p3/3RRR2 w - - 0 1");
+    expected_moves = {Move(12, 5, 'Q'), Move(12, 5, 'N'), Move(12, 5, 'R'), Move(12, 5, 'B'),
+        Move(12, 3, 'Q'), Move(12, 3, 'N'), Move(12, 3, 'R'), Move(12, 3, 'B')};
+    assert(p4.find_pawn_moves(12) == expected_moves);
+    expected_moves = {Move(52, 61, 'q'), Move(52, 61, 'n'), Move(52, 61, 'r'), Move(52, 61, 'b'),
+        Move(52, 59, 'q'), Move(52, 59, 'n'), Move(52, 59, 'r'), Move(52, 59, 'b')};
+    assert(p4.find_pawn_moves(52) == expected_moves);
+
+    // test for en passant
+    Position p5("8/8/8/8/3pPp2/3r1r2/8/8 b - e3 0 1");
+    expected_moves = {Move(35, 44, 'e')};
+    assert(p5.find_pawn_moves(35) == expected_moves);
+    expected_moves = {Move(37, 44, 'e')};
+    assert(p5.find_pawn_moves(37) == expected_moves);
+
+    Position p6("8/8/3r1r2/3PpP2/8/8/8/8 w - e6 0 1");
+    expected_moves = {Move(27, 20, 'E')};
+    assert(p6.find_pawn_moves(27) == expected_moves);
+    expected_moves = {Move(29, 20, 'E')};
+    assert(p6.find_pawn_moves(29) == expected_moves);
+
+    cout << "The pawn move generation works properly." << endl;
+}
 
 
 

@@ -13,5 +13,8 @@ int main(int argc, char const *argv[])
     test_rook_move_generation();
     test_bishop_move_generation();
     test_knight_move_generation();
+    test_pawn_move_generation();
+    Position p("8/8/3r1r2/3PpP2/8/8/8/8 w - e3 0 1");
+    utils::print_board(p.get_board());
     return 0;
 }

@@ -32,4 +32,7 @@ class Position {
         vector<Move> find_bishop_moves(const int& index) const;
         vector<Move> find_queen_moves(const int& index) const;
         vector<Move> find_knight_moves(const int& index) const;
+        vector<Move> find_pawn_moves(const int& index) const;
+        vector<Move> find_white_pawn_moves(const int& index) const;
+        vector<Move> find_black_pawn_moves(const int& index) const;
 };
